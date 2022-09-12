@@ -23,25 +23,6 @@ const router = new VueRouter({
     routes: routes
 });
 
-axios.defaults.baseURL = document.head.querySelector('meta[name="api-base-url"]');
-
-router.beforeEach((to, from, next) => {
-    
-    if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (Auth.check()) {
-    next();
-    return;
-    } else {
-    router.push('/');
-    }
-    } else {   
-        next();
-    }
-
-
-});
-
-
 
 
  

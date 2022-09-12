@@ -7,7 +7,7 @@
           id="profile"
           variant="link"
           toggle-class="text-decoration-none "
-          class="float-end mx-5"
+          class="float-end mx-5 d-inline-block"
           no-caret
         >
           <template #button-content>
@@ -28,9 +28,24 @@
               </div>
             </div>
           </template>
-          <b-dropdown-item to="/account">Account</b-dropdown-item>
+
+          <b-dropdown-item to="/profile">
+            <div class="label d-flex justify-content-between align-items-center">
+              <div class="left d-flex align-items-center">
+                <i class="material-icons">account_circle</i>
+                <span>Profile</span>
+              </div>
+            </div></b-dropdown-item
+          >
           <b-dropdown-divider></b-dropdown-divider>
-          <b-dropdown-item to="/logout">Logout</b-dropdown-item>
+          <b-dropdown-item to="/logout">
+            <div class="label d-flex justify-content-between align-items-center">
+              <div class="left d-flex align-items-center">
+                <i class="material-icons">logout</i>
+                <span>Logout</span>
+              </div>
+            </div>
+          </b-dropdown-item>
         </b-dropdown>
       </div>
     </header>
@@ -61,6 +76,17 @@ header {
 
     .img-thumbnail {
       border: 1px solid var(--primary);
+    }
+  }
+  .label {
+    white-space: nowrap;
+    user-select: none;
+    box-sizing: border-box;
+    color: var(--dark);
+
+    .material-icons {
+      font-size: 1.5rem;
+      color: var(--dark);
     }
   }
 }
