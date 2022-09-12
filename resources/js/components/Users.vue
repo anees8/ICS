@@ -1,6 +1,25 @@
 <template>
   <b-container fluid
-    ><BTable striped hover :fields="fields" :items="items"></BTable>
+    ><b-table
+      striped
+      hover
+      :fields="fields"
+      :items="items"
+      :per-page="perPage"
+      :current-page="currentPage"
+      bordered
+      responsive
+      small
+    ></b-table>
+    <b-pagination
+      v-model="currentPage"
+      :total-rows="rows"
+      :per-page="perPage"
+      first-text="First"
+      prev-text="Prev"
+      next-text="Next"
+      last-text="Last"
+    ></b-pagination>
   </b-container>
 </template>
 
@@ -8,6 +27,8 @@
 export default {
   data() {
     return {
+      currentPage: 1,
+      perPage: 10,
       fields: [
         {
           key: "last_name",
@@ -30,6 +51,11 @@ export default {
         { isActive: true, age: 38, first_name: "Jami", last_name: "Carney" },
       ],
     };
+  },
+  computed: {
+    rows() {
+      return this.items.length;
+    },
   },
 };
 </script>

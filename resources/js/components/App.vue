@@ -22,9 +22,9 @@ export default {
     return {
       smallMenu: false,
       users: {
-        profile: null,
-        name: null,
-        user_role: null,
+        profile: "",
+        name: "",
+        user_role: "",
       },
     };
   },

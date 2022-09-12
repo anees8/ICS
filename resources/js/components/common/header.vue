@@ -1,36 +1,40 @@
 <template>
-  <header>
-    <div
-      class="profile d-flex align-items-center h-100 float-end"
-      data-bs-toggle="dropdown"
-    >
-      <div class="flex-shrink-0">
-        <b-img
-          thumbnail
-          :src="users.profile ? users.profile : '/profile/no-image.png'"
-          rounded="circle"
-          class="user_profile"
-        />
+  <div>
+    <header>
+      <div>
+        <b-dropdown
+          size="sm"
+          id="profile"
+          variant="link"
+          toggle-class="text-decoration-none "
+          class="float-end mx-5"
+          no-caret
+        >
+          <template #button-content>
+            <div class="profile d-flex">
+              <b-img
+                thumbnail
+                :src="users.profile ? users.profile : '/profile/no-image.png'"
+                rounded="circle"
+                class="user_profile"
+              />
+              <div class="flex-column-1 ms-4">
+                <div>
+                  {{ users.name ? users.name : "ANEES AHMED" }}
+                </div>
+                <div>
+                  {{ users.user_role ? users.user_role : "Admin" }}
+                </div>
+              </div>
+            </div>
+          </template>
+          <b-dropdown-item to="/account">Account</b-dropdown-item>
+          <b-dropdown-divider></b-dropdown-divider>
+          <b-dropdown-item to="/logout">Logout</b-dropdown-item>
+        </b-dropdown>
       </div>
-      <div class="flex-column-1 ms-4">
-        <div>
-          <sapn>{{ users.name ? users.name : "ANEES AHMED" }}</sapn>
-        </div>
-        <div>
-          <sapn>{{ users.user_role ? users.user_role : "Admin" }}</sapn>
-        </div>
-      </div>
-    </div>
-    <ul class="dropdown-menu mt-4" style="background-color: var(--primary)">
-      <li style="background-color: var(--primary)">
-        <b-link class="text-decoration-none dropdown-item" to="">My Account </b-link>
-      </li>
-      <li><hr class="dropdown-divider" /></li>
-      <li>
-        <b-link class="text-decoration-none dropdown-item" to="/logout">Logout</b-link>
-      </li>
-    </ul>
-  </header>
+    </header>
+  </div>
 </template>
 <script>
 export default {
@@ -43,13 +47,10 @@ export default {
 header {
   height: 3.5rem;
   width: 100%;
-  padding: 1.5rem;
   border-bottom: 1px solid var(--dark);
   background-color: var(--dark);
-  color: var(--secondary);
-
   .profile {
-    margin-right: 3rem;
+    color: var(--secondary);
     .user_profile {
       height: 2.5rem;
       align-items: center;

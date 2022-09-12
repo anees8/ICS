@@ -1,19 +1,52 @@
-import './bootstrap';
+require('./bootstrap');
+import Vue from 'vue';
+window.Vue = require('vue');
 
-import {createApp} from 'vue';
-import router from "./router";
+import BootstrapVue from "bootstrap-vue";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
+Vue.use(BootstrapVue)
+import VueRouter from 'vue-router';
+import VueAxios from 'vue-axios';
+import axios from 'axios';
+import {routes} from './router';
 import App from './components/App.vue';
-import { SetupCalendar, Calendar, DatePicker } from 'v-calendar';
-import BootstrapVue3 from 'bootstrap-vue-3'
-
-import 'v-calendar/dist/style.css';
-
-
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue-3/dist/bootstrap-vue-3.css'
 
 
 
 
-createApp(App).use(router).use(SetupCalendar).use(BootstrapVue3).component('v-date-picker', DatePicker).mount('#app');
+Vue.use(VueRouter);
+Vue.use(VueAxios, axios);
+ 
+const router = new VueRouter({
+    mode: 'history',
+    routes: routes
+});
 
+axios.defaults.baseURL = document.head.querySelector('meta[name="api-base-url"]');
+
+router.beforeEach((to, from, next) => {
+    
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (Auth.check()) {
+    next();
+    return;
+    } else {
+    router.push('/');
+    }
+    } else {   
+        next();
+    }
+
+
+});
+
+
+
+
+ 
+const app = new Vue({
+    el: '#app',
+    router: router,
+    render: h => h(App),
+});
