@@ -1,4 +1,6 @@
-<template><footer class="footer">Footer</footer></template>
+<template>
+  <footer class="footer text-center">&copy; 2022 MAF TECHNOLOGY</footer>
+</template>
 <script>
 export default {};
 </script>
