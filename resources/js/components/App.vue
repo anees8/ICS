@@ -1,13 +1,13 @@
 <template>
   <div class="app">
-    <Sidebar :smallMenu="smallMenu" />
+    <Sidebar :smallMenu="smallMenu" v-if="!['Login', 'Register'].includes($route.name)" />
 
     <div class="main">
-      <Header :users="users" />
+      <Header :users="users" v-if="!['Login', 'Register'].includes($route.name)" />
       <div class="main-content">
         <router-view></router-view>
       </div>
-      <Footer />
+      <Footer v-if="!['Login', 'Register'].includes($route.name)" />
     </div>
   </div>
 </template>
@@ -56,9 +56,6 @@ export default {
 
   .main {
     flex: 1 1 0;
-    .main-content {
-      padding: 2rem;
-    }
   }
 }
 </style>

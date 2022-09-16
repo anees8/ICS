@@ -8,7 +8,7 @@ import Users from './components/Users.vue';
 export const routes = [
   {path: '/', redirect: '/dashboard' },
   {name: 'Login', path: '/login', component: Login, meta:{requiresAuth: false}},
-  {name: 'Login', path: '/register', component: Login, meta:{requiresAuth: false}},
+  {name: 'Register', path: '/register', component: Login, meta:{requiresAuth: false}},
   {name: 'Home', path: '/dashboard', component: Home, meta:{requiresAuth: true}},
   {path: '/about', component:About,meta:{requiresAuth: false}},
   {path: '/settings', component: Settings,meta:{requiresAuth: false}},

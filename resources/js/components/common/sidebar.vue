@@ -5,7 +5,7 @@
       <img v-if="!smallMenu" src="logo/logo.png" height="50" />
       <img v-if="smallMenu" src="logo/logo.png" width="75" />
 
-      <i class="material-icons" @click="smallMenu = !smallMenu">menu</i>
+      <i class="material-icons cursor-pointer" @click="smallMenu = !smallMenu">menu</i>
     </div>
 
     <hr class="m-0" />
@@ -88,6 +88,9 @@ aside {
 
       flex-direction: column;
       overflow: hidden;
+      i {
+        color: var(--primary);
+      }
     }
     overflow: inherit;
     width: 5rem;
