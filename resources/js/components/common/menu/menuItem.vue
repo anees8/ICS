@@ -1,6 +1,14 @@
 <template>
   <div class="menu-item" :class="{ expanded: expanded }">
-    <b-link class="text-decoration-none" v-bind:to="url">
+    <b-link
+      class="text-decoration-none"
+      v-on:click="
+        {
+          logout();
+        }
+      "
+      v-bind:to="url"
+    >
       <div
         class="label d-flex justify-content-between align-items-center"
         @click="togggleMenu()"
@@ -41,6 +49,7 @@
 export default {
   name: "menu-item",
   data: () => ({ showChildren: false, expanded: false, containerHeight: 0 }),
+
   props: {
     label: { type: String, required: true },
     icon: { type: String },
@@ -48,6 +57,7 @@ export default {
     url: { type: String },
     data: { type: Array },
     smallMenu: { type: Boolean },
+    logout: { type: Function },
   },
   computed: {
     showLabel() {
@@ -112,15 +122,19 @@ export default {
       color: var(--primary);
       transition: all 0.3s ease;
       &.expand {
+        transition: all 0.5s ease;
         font-size: 1.5rem;
         color: var(--primary);
+
         &.expanded {
+          transition: all 0.5s ease;
           transform: rotate(180deg);
         }
       }
     }
 
     &:hover {
+      transition: all 0.5s ease;
       background-color: var(--secondary);
       color: var(--dark);
       cursor: pointer;
@@ -130,11 +144,13 @@ export default {
     }
 
     &.small-menu {
+      transition: all 0.5s ease;
       width: fit-content;
     }
   }
 
   .items-container {
+    transition: all 0.5s ease;
     width: 100%;
     overflow: hidden;
     transition: all;
@@ -142,6 +158,7 @@ export default {
     left: calc(100% + 0.3rem);
 
     &.small-menu {
+      transition: all 0.5s ease;
       z-index: 99;
       width: fit-content;
       position: absolute;

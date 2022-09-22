@@ -6,12 +6,12 @@
           size="sm"
           id="profile"
           variant="link"
-          toggle-class="text-decoration-none "
-          class="float-end mx-5 d-inline-block"
+          toggle-class="text-decoration-none"
+          class="shadow-none float-end mx-5 d-inline-block border-0"
           no-caret
         >
           <template #button-content>
-            <div class="profile d-flex">
+            <div class="profile d-flex shadow-none" style="box-shadow: none !important">
               <b-img
                 thumbnail
                 :src="users.profile ? users.profile : '/profile/no-image.png'"
@@ -38,9 +38,9 @@
             </div></b-dropdown-item
           >
           <b-dropdown-divider></b-dropdown-divider>
-          <b-dropdown-item to="/logout">
+          <b-dropdown-item>
             <div class="label d-flex justify-content-between align-items-center">
-              <div class="left d-flex align-items-center">
+              <div class="left d-flex align-items-center" @click="logout()">
                 <i class="material-icons">logout</i>
                 <span>Logout</span>
               </div>
@@ -52,24 +52,40 @@
   </div>
 </template>
 <script>
+import Auth from "../../Auth.js";
 export default {
   props: {
     users: { type: Object },
+  },
+
+  methods: {
+    logout() {
+      axios
+        .post("/logout")
+        .then(({ data }) => {
+          Auth.logout(); //reset local storage
+          this.$router.push("/login");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
 };
 </script>
 <style lang="scss" scoped>
 header {
-  height: 3.5rem;
+  height: 4rem;
   width: 100%;
   border-bottom: 1px solid var(--dark);
   background-color: var(--dark);
   .profile {
     color: var(--secondary);
+    padding: 0.4rem;
     .user_profile {
       height: 2.5rem;
       align-items: center;
-      padding: 0;
+
       margin: 0;
       border: 1;
     }

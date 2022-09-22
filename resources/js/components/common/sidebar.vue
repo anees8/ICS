@@ -2,9 +2,8 @@
   <aside :class="{ 'small-menu': smallMenu }">
     <div class="logo d-flex justify-content-between align-items-center">
       <!-- <h2>ICS</h2> -->
-      <img v-if="!smallMenu" src="logo/logo.png" height="50" />
-      <img v-if="smallMenu" src="logo/logo.png" width="75" />
-
+      <img v-if="!smallMenu" src="logo/logo5.png" height="60" />
+      <img v-if="smallMenu" src="logo/logo5.png" width="80" />
       <i class="material-icons cursor-pointer" @click="smallMenu = !smallMenu">menu</i>
     </div>
 
@@ -18,6 +17,7 @@
       :depth="0"
       :data="item.children"
       :smallMenu="smallMenu"
+      :logout="item.logout"
     />
   </aside>
 </template>
@@ -54,9 +54,19 @@ export default {
       },
       {
         label: "Logout",
-
         icon: "logout",
-        url: "/logout",
+        logout: () => {
+          console.log("hdjfhd");
+          // axios
+          //   .post("/logout")
+          //   .then(({ data }) => {
+          //     Auth.logout(); //reset local storage
+          //     this.$router.push("/login");
+          //   })
+          //   .catch((error) => {
+          //     console.log(error);
+          //   });
+        },
       },
     ],
   }),
@@ -69,26 +79,28 @@ export default {
 aside {
   height: 100vh;
   width: 16rem;
-
+  transition: all 0.5s ease;
   background-color: var(--dark);
   .logo {
     color: var(--light);
-    height: 3.5rem;
-    padding: 0.313rem;
+    height: 4rem;
+    padding: 1rem;
     i {
       color: var(--primary);
     }
   }
 
   &.small-menu {
+    transition: all 0.5s ease;
     .logo {
       width: 5rem;
-      height: fit-content;
+      height: auto;
       display: flex;
 
       flex-direction: column;
       overflow: hidden;
       i {
+        padding-top: 1rem;
         color: var(--primary);
       }
     }

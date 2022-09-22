@@ -1,13 +1,19 @@
 <template>
   <div class="app">
-    <Sidebar :smallMenu="smallMenu" v-if="!['Login', 'Register'].includes($route.name)" />
+    <Sidebar
+      :smallMenu="smallMenu"
+      v-if="!['Login', 'Register', 'Error'].includes($route.name)"
+    />
 
     <div class="main">
-      <Header :users="users" v-if="!['Login', 'Register'].includes($route.name)" />
+      <Header
+        :users="users"
+        v-if="!['Login', 'Register', 'Error'].includes($route.name)"
+      />
       <div class="main-content">
         <router-view></router-view>
       </div>
-      <Footer v-if="!['Login', 'Register'].includes($route.name)" />
+      <Footer v-if="!['Login', 'Register', 'Error'].includes($route.name)" />
     </div>
   </div>
 </template>
@@ -20,7 +26,7 @@ import Footer from "./common/footer.vue";
 export default {
   data() {
     return {
-      smallMenu: false,
+      smallMenu: true,
       users: {
         profile: "",
         name: "",
@@ -28,6 +34,7 @@ export default {
       },
     };
   },
+
   components: {
     Sidebar,
     Header,

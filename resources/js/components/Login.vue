@@ -1,14 +1,13 @@
 <template>
-  <b-container fluid>
+  <b-container class="login" fluid>
     <b-row class="vh-100" align-h="center" align-v="center">
       <b-col md="4">
-        <b-card
-          header="Login"
-          header-text-variant="primary"
-          align="center"
-          body-class="text-start"
-        >
+        <b-card>
           <b-card-body>
+            <div class="d-flex justify-content-around">
+              <img src="logo/logo5.png" width="100" />
+            </div>
+
             <b-form @submit="onSubmit" @reset="onReset" v-if="show">
               <b-form-group
                 id="input-group-1"
@@ -22,7 +21,6 @@
                   v-model="form.email"
                   type="email"
                   placeholder="Enter email"
-                  required
                 ></b-form-input>
               </b-form-group>
 
@@ -34,23 +32,23 @@
               >
                 <b-form-input
                   id="input-2"
-                  v-model="form.name"
+                  v-model="form.password"
                   type="password"
                   placeholder="Enter Password"
-                  required
                 ></b-form-input>
               </b-form-group>
-
-              <b-button
-                pill
-                type="submit"
-                class="my-3 d-flex"
-                variant="outline-primary"
-                align-h="center"
-                align-v="center"
-              >
-                <span class="material-icons mx-2">login</span>Login</b-button
-              >
+              <div class="d-flex justify-content-around">
+                <b-button
+                  pill
+                  type="submit"
+                  class="d-flex"
+                  variant="outline-primary"
+                  align-h="center"
+                  align-v="center"
+                >
+                  <span class="material-icons mx-2">login</span>Login</b-button
+                >
+              </div>
             </b-form>
           </b-card-body>
         </b-card>
@@ -60,12 +58,14 @@
 </template>
 
 <script>
+import Auth from "../Auth.js";
+
 export default {
   data() {
     return {
       form: {
-        email: "",
-        name: "",
+        email: "admin@example.com",
+        password: "123456",
       },
       show: true,
       errors: [],
@@ -75,18 +75,20 @@ export default {
     onSubmit(event) {
       event.preventDefault();
       axios
-        .post("/api/login", this.form)
-        .then(() => {})
+        .post("/login", this.form)
+        .then(({ data }) => {
+          Auth.login(data.access_token, data.user); //set local storage
+          this.$router.push("/dashboard");
+        })
         .catch((error) => {
-          this.error = error.response.data.error;
+          console.log(error);
         });
-      alert(JSON.stringify(this.form));
     },
     onReset(event) {
       event.preventDefault();
       // Reset our form values
       this.form.email = "";
-      this.form.name = "";
+      this.form.password = "";
       // Trick to reset/clear native browser form validation state
       this.show = false;
       this.$nextTick(() => {
@@ -96,3 +98,8 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+.login {
+  background: var(--dark);
+}
+</style>

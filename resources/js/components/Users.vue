@@ -1,26 +1,19 @@
 <template>
-  <b-container fluid
-    ><b-table
+  <div>
+    <b-table
       striped
       hover
       :fields="fields"
       :items="items"
       :per-page="perPage"
       :current-page="currentPage"
-      bordered
-      responsive
-      small
     ></b-table>
     <b-pagination
       v-model="currentPage"
       :total-rows="rows"
       :per-page="perPage"
-      first-text="First"
-      prev-text="Prev"
-      next-text="Next"
-      last-text="Last"
     ></b-pagination>
-  </b-container>
+  </div>
 </template>
 
 <script>
@@ -28,7 +21,7 @@ export default {
   data() {
     return {
       currentPage: 1,
-      perPage: 10,
+      perPage: 1,
       fields: [
         {
           key: "last_name",
