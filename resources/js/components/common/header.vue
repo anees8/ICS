@@ -79,6 +79,7 @@ header {
   width: 100%;
   border-bottom: 1px solid var(--dark);
   background-color: var(--dark);
+
   .profile {
     color: var(--secondary);
     padding: 0.4rem;
@@ -94,15 +95,29 @@ header {
       border: 1px solid var(--primary);
     }
   }
+
   .label {
     white-space: nowrap;
     user-select: none;
     box-sizing: border-box;
-    color: var(--dark);
+    color: var(--primary);
 
     .material-icons {
       font-size: 1.5rem;
+      color: var(--primary);
+    }
+  }
+  a.dropdown-item:hover {
+    .label {
+      white-space: nowrap;
+      user-select: none;
+      box-sizing: border-box;
       color: var(--dark);
+
+      .material-icons {
+        font-size: 1.5rem;
+        color: var(--dark);
+      }
     }
   }
 }

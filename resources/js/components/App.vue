@@ -45,8 +45,8 @@ export default {
 
 <style lang="scss">
 :root {
-  --light: ;
   --dark: #293462;
+  --light: rgba(41, 52, 98, 0.2);
   --primary: #f5eddc;
   --secondary: #cfd2cf;
   --white: #fff;
@@ -57,7 +57,25 @@ export default {
   box-sizing: border-box;
   font-family: "Fana sans", sans-serif, "Times New Roman", Times, serif;
 }
+a,
+a:hover {
+  text-decoration: none !important;
+}
 
+.btn:active,
+.btn:focus {
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  outline: none;
+}
+.dropdown-menu,
+.dropdown-item {
+  background-color: var(--dark) !important;
+}
+a.dropdown-item:hover {
+  background-color: var(--secondary) !important;
+  cursor: pointer;
+}
 .app {
   display: flex;
 

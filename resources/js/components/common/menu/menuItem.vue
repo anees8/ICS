@@ -2,7 +2,7 @@
   <div class="menu-item" :class="{ expanded: expanded }">
     <b-link
       class="text-decoration-none"
-      v-on:click="
+      @click="
         {
           logout();
         }
@@ -101,7 +101,7 @@ export default {
     }
 
     .label {
-      color: var(--dark);
+      color: var(--ligt);
       i {
         color: var(--dark);
       }

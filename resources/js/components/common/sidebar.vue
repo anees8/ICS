@@ -23,6 +23,7 @@
 </template>
 <script>
 import MenuItem from "./menu/menuItem.vue";
+import Auth from "../../Auth.js";
 
 export default {
   props: {
@@ -56,16 +57,15 @@ export default {
         label: "Logout",
         icon: "logout",
         logout: () => {
-          console.log("hdjfhd");
-          // axios
-          //   .post("/logout")
-          //   .then(({ data }) => {
-          //     Auth.logout(); //reset local storage
-          //     this.$router.push("/login");
-          //   })
-          //   .catch((error) => {
-          //     console.log(error);
-          //   });
+          axios
+            .post("/logout")
+            .then(({ data }) => {
+              Auth.logout(); //reset local storage
+              this.$router.push("/login");
+            })
+            .catch((error) => {
+              console.log(error);
+            });
         },
       },
     ],
@@ -78,7 +78,8 @@ export default {
 <style lang="scss" scoped>
 aside {
   height: 100vh;
-  width: 16rem;
+  max-height: 100%;
+  width: 15rem;
   transition: all 0.5s ease;
   background-color: var(--dark);
   .logo {
