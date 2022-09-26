@@ -3,8 +3,10 @@
     <div class="logo d-flex justify-content-between align-items-center">
       <!-- <h2>ICS</h2> -->
       <img v-if="!smallMenu" src="logo/logo5.png" height="60" />
-      <img v-if="smallMenu" src="logo/logo5.png" width="80" />
-      <i class="material-icons cursor-pointer" @click="smallMenu = !smallMenu">menu</i>
+      <img v-if="smallMenu" src="logo/logo5.png" width="65" />
+      <i class="material-icons cursor-pointer" @click="smallMenu = !smallMenu">
+        arrow_back
+      </i>
     </div>
 
     <hr class="m-0" />
@@ -46,27 +48,16 @@ export default {
         label: "Users",
         icon: "people",
         children: [
-          { label: "Users List", url: "/list_users" },
-          { label: "Employee", url: "/list_employee" },
-          { label: "Outsource Employee", url: "/list_outsource_employee" },
-          { label: "Customer", url: "/list_customer" },
-          { label: "Supplier", url: "/list_suplier" },
+          { label: "Users List", icon: "person", url: "/list_users" },
+          { label: "Employee", icon: "badge", url: "/list_employee" },
+          {
+            label: "Outsource Employee",
+            icon: "person",
+            url: "/list_outsource_employee",
+          },
+          { label: "Customer", icon: "person", url: "/list_customer" },
+          { label: "Supplier", icon: "person", url: "/list_suplier" },
         ],
-      },
-      {
-        label: "Logout",
-        icon: "logout",
-        logout: () => {
-          axios
-            .post("/logout")
-            .then(({ data }) => {
-              Auth.logout(); //reset local storage
-              this.$router.push("/login");
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        },
       },
     ],
   }),
@@ -98,10 +89,9 @@ aside {
       height: auto;
       display: flex;
 
-      flex-direction: column;
-      overflow: hidden;
       i {
-        padding-top: 1rem;
+        transform: rotate(180deg);
+        padding-right: 1rem;
         color: var(--primary);
       }
     }

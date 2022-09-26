@@ -1,18 +1,9 @@
 <template>
   <div class="menu-item" :class="{ expanded: expanded }">
-    <b-link
-      class="text-decoration-none"
-      @click="
-        {
-          logout();
-        }
-      "
-      v-bind:to="url"
-    >
+    <b-link class="text-decoration-none" v-bind:to="url">
       <div
         class="label d-flex justify-content-between align-items-center"
         @click="togggleMenu()"
-        :style="{ paddingLeft: depth * 20 + 20 + 'px' }"
       >
         <div class="left d-flex align-items-center">
           <i v-if="icon" class="material-icons">{{ icon }}</i>
@@ -38,7 +29,7 @@
         :label="item.label"
         :icon="item.icon"
         :url="item.url"
-        :depth="depth + 1"
+        :depth="depth + 0"
         :data="item.children"
         :smallMenu="smallMenu"
       ></menu-item>
@@ -57,7 +48,6 @@ export default {
     url: { type: String },
     data: { type: Array },
     smallMenu: { type: Boolean },
-    logout: { type: Function },
   },
   computed: {
     showLabel() {
@@ -151,24 +141,16 @@ export default {
 
   .items-container {
     transition: all 0.5s ease;
-    width: 100%;
-    overflow: hidden;
-    transition: all;
 
-    left: calc(100% + 0.3rem);
+    transition: all;
 
     &.small-menu {
       transition: all 0.5s ease;
-      z-index: 99;
-      width: fit-content;
-      position: absolute;
-      background-color: var(--dark);
-      box-shadow: 0 0 0.625rem var(--secondary);
-      top: 0;
+
+      position: relative;
 
       .label {
         width: 100%;
-        padding-left: 3rem;
       }
     }
   }
