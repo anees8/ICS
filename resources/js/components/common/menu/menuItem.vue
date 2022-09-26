@@ -91,7 +91,7 @@ export default {
     }
 
     .label {
-      color: var(--ligt);
+      color: var(--dark);
       i {
         color: var(--dark);
       }
