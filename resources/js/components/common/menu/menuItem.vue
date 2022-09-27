@@ -3,7 +3,7 @@
     <b-link class="text-decoration-none" v-bind:to="url">
       <div
         class="label d-flex justify-content-between align-items-center"
-        @click="togggleMenu()"
+        v-on:click="togggleMenu()"
       >
         <div class="left d-flex align-items-center">
           <i v-if="icon" class="material-icons">{{ icon }}</i>

@@ -1,9 +1,6 @@
 <template>
   <div class="app">
-    <Sidebar
-      :smallMenu="smallMenu"
-      v-if="!['Login', 'Register', 'Error'].includes($route.name)"
-    />
+    <Sidebar v-if="!['Login', 'Register', 'Error'].includes($route.name)" />
 
     <div class="main">
       <Header
@@ -26,7 +23,6 @@ import Footer from "./common/footer.vue";
 export default {
   data() {
     return {
-      smallMenu: true,
       users: {
         profile: "",
         name: "",

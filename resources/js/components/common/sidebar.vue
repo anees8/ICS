@@ -19,7 +19,6 @@
       :depth="0"
       :data="item.children"
       :smallMenu="smallMenu"
-      :logout="item.logout"
     />
   </aside>
 </template>
@@ -28,10 +27,8 @@ import MenuItem from "./menu/menuItem.vue";
 import Auth from "../../Auth.js";
 
 export default {
-  props: {
-    smallMenu: { type: Boolean },
-  },
   data: () => ({
+    smallMenu: false,
     menuTree: [
       {
         label: "Home",
@@ -61,6 +58,7 @@ export default {
       },
     ],
   }),
+
   components: {
     MenuItem,
   },
