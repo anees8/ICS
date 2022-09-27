@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="m-3">
     <b-table
       striped
       hover
@@ -7,7 +7,29 @@
       :items="items"
       :per-page="perPage"
       :current-page="currentPage"
-    ></b-table>
+      bordered
+    >
+      <template #cell(action)="data">
+        <b-button
+          class="mx-2"
+          @click="get_user_by_id(data.item)"
+          v-b-modal.user_edit_modal
+          pill
+          variant="outline-success"
+        >
+          <span class="material-icons"> edit </span>
+        </b-button>
+
+        <b-button
+          class="mx-2"
+          @click="delete_user(data.item)"
+          pill
+          variant="outline-danger"
+        >
+          <span class="material-icons"> delete_forever </span>
+        </b-button>
+      </template>
+    </b-table>
     <b-pagination
       v-model="currentPage"
       :total-rows="rows"
@@ -18,32 +40,39 @@
 
 <script>
 export default {
+  mounted() {
+    this.loadlist();
+
+    this.timer = setInterval(() => {
+      this.loadlist();
+    }, 2000);
+  },
+
   data() {
     return {
+      items: [],
+      fields: ["id", "name", "email", "action"],
+      errors: {},
+      file: {},
+      loading: false,
+
+      editUser: {
+        id: null,
+        name: null,
+      },
+      perPage: 10,
       currentPage: 1,
-      perPage: 1,
-      fields: [
-        {
-          key: "last_name",
-          isSortable: true,
-        },
-        {
-          key: "first_name",
-          sortable: false,
-        },
-        {
-          key: "age",
-          label: "Person age",
-          sortable: true,
-        },
-      ],
-      items: [
-        { isActive: true, age: 40, first_name: "Dickerson", last_name: "Macdonald" },
-        { isActive: false, age: 21, first_name: "Larsen", last_name: "Shaw" },
-        { isActive: false, age: 89, first_name: "Geneva", last_name: "Wilson" },
-        { isActive: true, age: 38, first_name: "Jami", last_name: "Carney" },
-      ],
+      animate: true,
+
+      progress_value: 0,
     };
+  },
+  methods: {
+    loadlist() {
+      axios.get("users").then((resp) => {
+        this.items = resp.data.user;
+      });
+    },
   },
   computed: {
     rows() {

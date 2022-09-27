@@ -14,6 +14,7 @@ import App from './components/App.vue';
 import Auth from './Auth.js';
 Vue.use(VueAxios, axios);
 
+
 window.axios = require('axios');
 window.axios.defaults.baseURL = '/api/';
 

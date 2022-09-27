@@ -33,7 +33,7 @@ export default {
       {
         label: "Home",
         icon: "home",
-        url: "/",
+        url: "/dashboard",
       },
       {
         label: "About",

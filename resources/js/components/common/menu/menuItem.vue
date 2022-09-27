@@ -6,7 +6,13 @@
         v-on:click="togggleMenu()"
       >
         <div class="left d-flex align-items-center">
-          <i v-if="icon" class="material-icons">{{ icon }}</i>
+          <i v-if="icon && !smallMenu" class="material-icons">{{ icon }}</i>
+          <i
+            v-if="icon && smallMenu"
+            class="material-icons"
+            v-b-tooltip.right="this.label"
+            >{{ icon }}</i
+          >
           <span v-if="showLabel">{{ label }} </span>
         </div>
 
@@ -107,7 +113,7 @@ export default {
     color: var(--primary);
 
     i {
-      padding-right: 0.5rem;
+      padding-right: 0.2rem;
       font-size: 1.5rem;
       color: var(--primary);
       transition: all 0.3s ease;

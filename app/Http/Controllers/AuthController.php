@@ -70,4 +70,11 @@ class AuthController extends Controller
         $response = ['message' => 'You have been successfully logged out!'];
         return response($response, 200);
     }
+    public function users(){
+   
+        $user= User::get();
+        
+
+        return response()->json(['message'=>'User Return Successfully' ,'user' => $user], 200);
+        }
 }
