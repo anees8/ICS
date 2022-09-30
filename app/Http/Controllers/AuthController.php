@@ -11,70 +11,91 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
-    {
-        $requestData = $request->all();
-        $validator = Validator::make($requestData,[
-            'name' => 'required|max:55',
-            'email' => 'email|required|unique:users',
-            'password' => 'required|confirmed'
-        ]);
+public function register(Request $request){
+    $requestData = $request->all();
+    $validator = Validator::make($requestData,[
+    'name' => 'required|max:55',
+    'email' => 'email|required|unique:users',
+    'password' => 'required|confirmed'
+    ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'errors' => $validator->errors()
-            ], 422);
-        }
-
-        $requestData['password'] = Hash::make($requestData['password']);
-
-        $user = User::create($requestData);
-
-        return response([ 'status' => true, 'message' => 'User successfully register.' ], 200);
+    if ($validator->fails()) {
+    return response()->json([
+    'errors' => $validator->errors()
+    ], 422);
     }
 
-    public function login(Request $request)
-    {
+    $requestData['password'] = Hash::make($requestData['password']);
+
+    $user = User::create($requestData);
+
+    return response([ 'status' => true, 'message' => 'User successfully register.' ], 200);
+    }
+
+public function login(Request $request){
         $requestData = $request->all();
         $validator = Validator::make($requestData,[
-            'email' => 'email|required',
-            'password' => 'required'
+        'email' => 'email|required',
+        'password' => 'required'
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'errors' => $validator->errors()
-            ], 422);
+        return response()->json([
+        'errors' => $validator->errors()
+        ], 422);
         }
 
         if(! auth()->attempt($requestData)){
-            return response()->json(['error' => 'UnAuthorised Access'], 401);
+        return response()->json(['error' => 'UnAuthorised Access'], 401);
         }
 
         $accessToken = auth()->user()->createToken('authToken')->accessToken;
 
         return response(['user' => auth()->user(), 'access_token' => $accessToken], 200);
-    }
+        }
 
-    public function me(Request $request)
-    {
+public function me(Request $request){
         $user = $request->user();
 
         return response()->json(['user' => $user], 200);
     }
 
-    public function logout (Request $request)
-    {
+public function logout (Request $request){
         $token = $request->user()->token();
         $token->revoke();
         $response = ['message' => 'You have been successfully logged out!'];
         return response($response, 200);
     }
-    public function users(){
-   
-        $user= User::get();
-        
+public function users(){
 
-        return response()->json(['message'=>'User Return Successfully' ,'user' => $user], 200);
+    $user= User::get();
+    return response()->json(['message'=>'User Return Successfully' ,'user' => $user], 200);
+    }
+
+
+public function destroy($id){
+        return User::destroy(json_decode($id)); 
         }
+        
+public function update(Request $request,$id){    
+        $requestData = $request->all();
+        $validator = Validator::make($requestData,[
+        'name' => 'required|min:3',
+        ]);
+
+        if ($validator->fails()) {
+        return response()->json([
+        'errors' => $validator->errors()
+        ], 422);
+        }
+
+        User::where('id',$id)->update($request->all());
+        return response()->json(['message'=>'User Update Successfully'], 200);
+        }
+        
+public function get_user($id){
+    $user= User::where('id',$id)->get()->first();
+    return response()->json(['message'=>'User Return Successfully' ,'user' => $user], 200);
+    } 
+        
 }

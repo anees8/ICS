@@ -1,32 +1,52 @@
 <template>
   <div class="m-3">
+    <b-modal ref="modal" id="user_edit_modal" centered title="Edit User">
+      <form @submit.stop.prevent="updateuserForm" enctype="multipart/form-data">
+        <b-form-group id="input-group-1" label-for="input-1">
+          <b-form-input
+            id="input-1"
+            v-model="editUser.name"
+            type="text"
+            placeholder="User Name"
+            required
+          >
+          </b-form-input>
+          <span v-if="errors.name" class="text-danger">{{ errors.name[0] }}</span>
+        </b-form-group>
+      </form>
+
+      <template #modal-footer="{ cancel }">
+        <b-button variant="outline-secondary" @click="cancel()"> Cancel </b-button>
+        <b-button variant="outline-primary" @click="handleUpdate()">
+          Update User
+        </b-button>
+      </template>
+    </b-modal>
     <b-table
-      striped
-      hover
       :fields="fields"
       :items="items"
       :per-page="perPage"
       :current-page="currentPage"
       bordered
+      striped
+      hover
     >
       <template #cell(action)="data">
         <b-button
-          class="mx-2"
+          class="rounded-circle p-2"
           @click="get_user_by_id(data.item)"
           v-b-modal.user_edit_modal
-          pill
           variant="outline-success"
         >
-          <span class="material-icons"> edit </span>
+          <i class="material-icons"> edit </i>
         </b-button>
 
         <b-button
-          class="mx-2"
+          class="rounded-circle p-2"
           @click="delete_user(data.item)"
-          pill
           variant="outline-danger"
         >
-          <span class="material-icons"> delete_forever </span>
+          <i class="material-icons"> delete_forever </i>
         </b-button>
       </template>
     </b-table>
@@ -73,6 +93,63 @@ export default {
         this.items = resp.data.user;
       });
     },
+    handleOk(bvModalEvent) {
+      bvModalEvent.preventDefault();
+      this.submitForm();
+    },
+    get_user_by_id(item) {
+      axios.get("users/" + item.id).then((res) => {
+        this.editUser.id = res.data.user.id;
+        this.editUser.name = res.data.user.name;
+      });
+    },
+    handleUpdate() {
+      this.updateuserForm();
+    },
+    updateuserForm() {
+      const id = this.editUser.id;
+      const update_user = {
+        name: this.editUser.name,
+      };
+
+      axios
+        .put("users/" + id, update_user)
+        .then((res) => {
+          this.$root.$emit("bv::hide::modal", "user_edit_modal", "#btnShow");
+          this.loadlist();
+        })
+        .catch((error) => {
+          this.errors = error.response.data.errors;
+        });
+    },
+
+    hideModal() {
+      this.$root.$emit("bv::hide::modal", "modal-1", "#btnShow");
+    },
+
+    delete_user(item) {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "Do you want to Delete this User : " + item.name,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios
+            .delete("users/" + item.id)
+            .then((res) => {
+              this.loadlist();
+              Swal.fire("Deleted!", "Your file has been deleted.", "success");
+            })
+            .catch((error) => {
+              this.errors = error.response.data.errors;
+            });
+        }
+      });
+    },
   },
   computed: {
     rows() {
@@ -81,3 +158,9 @@ export default {
   },
 };
 </script>
+
+<style>
+button.close {
+  border: 0;
+}
+</style>

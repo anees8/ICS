@@ -5,6 +5,8 @@ window.Vue = require('vue');
 import BootstrapVue from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
+import Swal from 'sweetalert2';
+window.Swal=Swal;
 Vue.use(BootstrapVue)
 
 import VueAxios from 'vue-axios';
