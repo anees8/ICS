@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Role;
 
 class AuthController extends Controller
 {
@@ -68,7 +69,9 @@ public function logout (Request $request){
     }
 public function users(){
 
-    $user= User::get();
+    $user= User::select('users.*','roles.role_name')->join('roles', 'roles.role_id', '=', 'users.role_id')->orderBy('users.id')->get();
+
+   
     return response()->json(['message'=>'User Return Successfully' ,'user' => $user], 200);
     }
 
@@ -81,6 +84,7 @@ public function update(Request $request,$id){
         $requestData = $request->all();
         $validator = Validator::make($requestData,[
         'name' => 'required|min:3',
+
         ]);
 
         if ($validator->fails()) {
@@ -94,8 +98,11 @@ public function update(Request $request,$id){
         }
         
 public function get_user($id){
+
+
     $user= User::where('id',$id)->get()->first();
-    return response()->json(['message'=>'User Return Successfully' ,'user' => $user], 200);
+    $roles= Role::select('role_id','role_name')->get();
+    return response()->json(['message'=>'User Return Successfully' ,'user' => $user ,'roles' => $roles], 200);
     } 
         
 }

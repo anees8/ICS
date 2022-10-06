@@ -1,13 +1,13 @@
 <template>
   <div>
     <header>
-      <div>
+      <div class="d-flex justify-content-end mr-2">
         <b-dropdown
           size="sm"
           id="profile"
           variant="link"
           toggle-class="text-decoration-none"
-          class="shadow-none float-end mx-5 d-inline-block border-0"
+          class="shadow-none mx-5 d-inline-block border-0"
           no-caret
         >
           <template #button-content>
@@ -16,7 +16,7 @@
                 thumbnail
                 :src="users.profile ? users.profile : '/profile/no-image.png'"
                 rounded="circle"
-                class="user_profile"
+                class="user_profile mr-2"
               />
               <div class="flex-column-1 ms-4">
                 <div>

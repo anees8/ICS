@@ -11,8 +11,18 @@
             required
           >
           </b-form-input>
+
           <span v-if="errors.name" class="text-danger">{{ errors.name[0] }}</span>
         </b-form-group>
+
+        <b-form-select
+          v-model="editUser.role"
+          :options="options"
+          class="mb-3"
+          value-field="role_id"
+          text-field="role_name"
+          disabled-field="notEnabled"
+        ></b-form-select>
       </form>
 
       <template #modal-footer="{ cancel }">
@@ -22,6 +32,21 @@
         </b-button>
       </template>
     </b-modal>
+
+    <div class="my-3 d-flex align-items-center">
+      <b-button v-b-modal.user_add_modal class="ml-auto" pill variant="outline-secondary"
+        >Add User</b-button
+      >
+
+      <b-modal id="user_add_modal" centered title="Add User">
+        <template #modal-footer="{ cancel }">
+          <b-button variant="outline-secondary" @click="cancel()"> Cancel </b-button>
+          <b-button variant="outline-primary" @click="handleAdd()">
+            Update User
+          </b-button>
+        </template>
+      </b-modal>
+    </div>
     <b-table
       :fields="fields"
       :items="items"
@@ -60,7 +85,7 @@
 
 <script>
 export default {
-  mounted() {
+  created() {
     this.loadlist();
 
     this.timer = setInterval(() => {
@@ -71,14 +96,15 @@ export default {
   data() {
     return {
       items: [],
-      fields: ["id", "name", "email", "action"],
+      fields: ["id", "name", "email", "role_name", "action"],
       errors: {},
       file: {},
       loading: false,
-
+      options: [],
       editUser: {
         id: null,
         name: null,
+        role: null,
       },
       perPage: 10,
       currentPage: 1,
@@ -99,8 +125,12 @@ export default {
     },
     get_user_by_id(item) {
       axios.get("users/" + item.id).then((res) => {
+        this.errors = {};
         this.editUser.id = res.data.user.id;
         this.editUser.name = res.data.user.name;
+        this.editUser.role = res.data.user.role_id;
+
+        this.options = res.data.roles;
       });
     },
     handleUpdate() {
@@ -110,6 +140,7 @@ export default {
       const id = this.editUser.id;
       const update_user = {
         name: this.editUser.name,
+        role_id: this.editUser.role,
       };
 
       axios
@@ -117,6 +148,7 @@ export default {
         .then((res) => {
           this.$root.$emit("bv::hide::modal", "user_edit_modal", "#btnShow");
           this.loadlist();
+          this.errors = {};
         })
         .catch((error) => {
           this.errors = error.response.data.errors;
@@ -141,6 +173,7 @@ export default {
           axios
             .delete("users/" + item.id)
             .then((res) => {
+              this.errors = {};
               this.loadlist();
               Swal.fire("Deleted!", "Your file has been deleted.", "success");
             })
