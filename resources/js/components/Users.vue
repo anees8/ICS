@@ -90,7 +90,7 @@ export default {
 
     this.timer = setInterval(() => {
       this.loadlist();
-    }, 2000);
+    }, 3000);
   },
 
   data() {

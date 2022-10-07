@@ -9,6 +9,7 @@ import About from './components/About.vue';
 import Settings from './components/Settings.vue';
 import NotFoundComponent from './components/404.vue';
 import Users from './components/Users.vue';
+import Employee from './components/Employee.vue';
 
 export const routes = [
   {path: '/', redirect: '/dashboard' },
@@ -19,7 +20,7 @@ export const routes = [
   {path: '/settings', component: Settings,meta:{requiresAuth: true}},
   {path: '/logout', component: Home, meta: {requiresAuth: true}},
   {path: '/list_users', component: Users, meta: {requiresAuth: true}},
-  {path: '/list_employee', component: Home, meta:{requiresAuth: true}},
+  {path: '/list_employee', component: Employee, meta:{requiresAuth: true}},
   {path: '/list_outsource_employee', component: Home, meta:{requiresAuth: true}},
   {path: '/list_customer', component: Home, meta: {requiresAuth: true}},
   {path: '/list_suplier', component: Home, meta: {requiresAuth: true}},

@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EmployeeController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -26,6 +27,10 @@ Route::middleware('auth:api')->group(function () {
     Route::delete('/users/{id}',[AuthController::class,'destroy']);
     Route::put('/users/{id}',[AuthController::class,'update']);
     Route::get('/users/{id}',[AuthController::class,'get_user']);
+    Route::resource('employee', EmployeeController::class);
+
+
+       
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

@@ -75,7 +75,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 header {
-  height: 4rem;
+  height: 4.2rem;
   width: 100%;
   border-bottom: 1px solid var(--dark);
   background-color: var(--dark);
