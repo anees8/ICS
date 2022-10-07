@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 23, 2022 at 07:03 AM
+-- Generation Time: Oct 07, 2022 at 04:24 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -20,6 +20,35 @@ SET time_zone = "+00:00";
 --
 -- Database: `ics`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employees`
+--
+
+CREATE TABLE `employees` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `employee_id` varchar(11) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dateofbirth` date DEFAULT NULL,
+  `job` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `skill` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` bigint(20) DEFAULT NULL,
+  `salary` bigint(20) NOT NULL,
+  `join_date` date DEFAULT NULL,
+  `exit_date` date DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `employees`
+--
+
+INSERT INTO `employees` (`id`, `employee_id`, `name`, `dateofbirth`, `job`, `skill`, `email`, `phone`, `salary`, `join_date`, `exit_date`, `created_at`, `updated_at`) VALUES
+(1, 'CP001', 'MEERANJI ANEES AHMED', '1997-02-25', 'Developer', 'Planning', 'aneesahmed8484@gmail.com', 8807816321, 10000, '2021-07-23', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -64,7 +93,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (8, '2019_08_19_000000_create_failed_jobs_table', 1),
 (9, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (10, '2022_09_15_121918_create_roles_table', 1),
-(11, '2022_09_15_124315_add_foreign_keys_to_user_role_table', 1);
+(11, '2022_09_15_124315_add_foreign_keys_to_user_role_table', 1),
+(12, '2022_10_07_134645_create_employees_table', 2);
 
 -- --------------------------------------------------------
 
@@ -91,8 +121,13 @@ CREATE TABLE `oauth_access_tokens` (
 INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes`, `revoked`, `created_at`, `updated_at`, `expires_at`) VALUES
 ('044b11eef160c49c32677bf7f47a75d776c9a48e4597a687f36906b0e26651b5bc6dcfdb2242ddfb', 4, 1, 'authToken', '[]', 1, '2022-09-21 02:31:20', '2022-09-21 02:31:20', '2023-09-21 08:01:20'),
 ('06c8871cebfb6a355e16bbdf0a28becc137364128e6825a9a8c6a142cde10b70cbb28a9b62235d4e', 4, 1, 'authToken', '[]', 1, '2022-09-22 04:51:16', '2022-09-22 04:51:16', '2023-09-22 10:21:16'),
+('07fcc84c569362ba855870c7a586c874724de10857672b45e57c1bb4eb365ec2a1db29c4e5a58786', 4, 1, 'authToken', '[]', 1, '2022-09-23 07:26:44', '2022-09-23 07:26:44', '2023-09-23 12:56:44'),
 ('09a26d12c97194eace2190841012dd81a5c7131318b45ee4b303677bc1d4693d831bd4b0e058267e', 1, 1, 'authToken', '[]', 0, '2022-09-20 06:30:53', '2022-09-20 06:30:53', '2023-09-20 12:00:53'),
+('0ebeaa42187f320f6b131f3881984bf592596a8fc937dbf8646522ff0680147adec4419000c74542', 4, 1, 'authToken', '[]', 1, '2022-09-23 08:22:31', '2022-09-23 08:22:31', '2023-09-23 13:52:31'),
+('0efec14bcd4c66e9bfeae99fda2e08f7c48425f91bd90882a758f112ab64b9130f72e68f597b4b47', 4, 1, 'authToken', '[]', 1, '2022-09-23 05:56:48', '2022-09-23 05:56:48', '2023-09-23 11:26:48'),
+('0f1206494b139f95da21eab01c985960937274079db2a348187c810d729ef22044f4527eaacafac9', 4, 1, 'authToken', '[]', 1, '2022-09-27 08:29:44', '2022-09-27 08:29:44', '2023-09-27 13:59:44'),
 ('0f8c27fd391c6ced664285f51b9c7731aa3ebd6292af213dd8cc968f10f3027b2d2c73396cb8f4b3', 4, 1, 'authToken', '[]', 0, '2022-09-20 23:46:35', '2022-09-20 23:46:35', '2023-09-21 05:16:35'),
+('107ca93a6c9fb7fde95ebc3359f22123f395382986e7f216e6a16f9d1d8edfa83d0150593e8fc9e9', 4, 1, 'authToken', '[]', 1, '2022-09-23 08:22:35', '2022-09-23 08:22:35', '2023-09-23 13:52:35'),
 ('1706a2073755af9e720194345a079fc5c44283bed5bd680111c0687e15bbe1b37cf78dcff0fe7a13', 4, 1, 'authToken', '[]', 0, '2022-09-20 23:42:23', '2022-09-20 23:42:23', '2023-09-21 05:12:23'),
 ('1bfd275d4e873b340409022debb0192a1417894d10ca445c3e8f80bb937a281f257270ff2bba49f5', 4, 1, 'authToken', '[]', 0, '2022-09-22 01:52:40', '2022-09-22 01:52:40', '2023-09-22 07:22:40'),
 ('1d3872ea49456c61ac933b8d2e829b0c43784c0b7b9d7a2eccd13e80ab0fce30d6060a9a142c54ce', 4, 1, 'authToken', '[]', 1, '2022-09-21 06:03:22', '2022-09-21 06:03:22', '2023-09-21 11:33:22'),
@@ -110,39 +145,62 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('2b6d77fd14af202cd14257e58b518fdbec16ca7928387e38f3d7c1a5853ff554596d7bcef48a3880', 4, 1, 'authToken', '[]', 1, '2022-09-22 08:36:15', '2022-09-22 08:36:15', '2023-09-22 14:06:15'),
 ('2ca49efacfe5e63f731f7bcb3e9748bdc33ddc2d69895a85374be9646df8d0dc79fe8023681a49b4', 4, 1, 'authToken', '[]', 1, '2022-09-22 01:11:20', '2022-09-22 01:11:20', '2023-09-22 06:41:20'),
 ('2edffacc784e59564a0038cf59e2f0b902a2a84bd62c5fb6b02476d049cab13dcab39e616209b867', 4, 1, 'authToken', '[]', 1, '2022-09-21 08:37:18', '2022-09-21 08:37:18', '2023-09-21 14:07:18'),
+('30b534b05393a9afacb49e5151f5992cc41f0537ab467815313faa4864f330e9951778ec2e41b0c8', 4, 1, 'authToken', '[]', 1, '2022-09-23 05:56:34', '2022-09-23 05:56:34', '2023-09-23 11:26:34'),
+('32b8e6e81417082d0abbc2bef517506b93afe94807b17bceb3f5ef84c9e1bbc085c3e2b3b01785e0', 4, 1, 'authToken', '[]', 1, '2022-09-27 08:29:08', '2022-09-27 08:29:08', '2023-09-27 13:59:08'),
 ('33bce496ba900ad6cebf778392d46ca929ff901c633bbd27638e5a0c4ba93a0f497d93d89b4749a6', 4, 1, 'authToken', '[]', 1, '2022-09-21 04:28:59', '2022-09-21 04:28:59', '2023-09-21 09:58:59'),
 ('3875174900d765b269ae42a0ea9e095c9983b562ced58c067f325c93d009401641d70fbd45b64cb5', 4, 1, 'authToken', '[]', 0, '2022-09-20 23:43:30', '2022-09-20 23:43:30', '2023-09-21 05:13:30'),
 ('3ce6ce0912e1193750f0d037fc19d3c0e24945c08a2d55fa040cf928f41d2a704ce3ea765ffe669c', 4, 1, 'authToken', '[]', 1, '2022-09-21 05:55:28', '2022-09-21 05:55:28', '2023-09-21 11:25:28'),
 ('3efcd0b9899222ebc3c969c5d7791768d5f8f37958c9ecf65490e1c4ee7ca1585d6f040f7a8bfabf', 4, 1, 'authToken', '[]', 1, '2022-09-22 05:05:12', '2022-09-22 05:05:12', '2023-09-22 10:35:12'),
 ('43bdacdaec8a08478a6e07224c732bb03565664cd26a6bbce918259e277d45add82f73d6354c1a80', 4, 1, 'authToken', '[]', 0, '2022-09-20 23:19:10', '2022-09-20 23:19:10', '2023-09-21 04:49:10'),
+('462cc0cdc2be907585b59bb6b1073d1b5e7febdde8221490a3d9bd866cd10baa9d46c7e40049e6c4', 4, 1, 'authToken', '[]', 1, '2022-09-23 08:20:30', '2022-09-23 08:20:30', '2023-09-23 13:50:30'),
 ('470456fd4efac6c568f7e775c51f87fec99d1bb4879a9ac191e2e32aa09f916682499f28786693d6', 4, 1, 'authToken', '[]', 0, '2022-09-20 23:45:34', '2022-09-20 23:45:34', '2023-09-21 05:15:34'),
+('512d090201ed62c05e8f11d168b3c2aff3c52d17a4e750ac882d533ad7da6163a809ae3a7c4a1379', 4, 1, 'authToken', '[]', 1, '2022-09-23 08:23:41', '2022-09-23 08:23:41', '2023-09-23 13:53:41'),
+('5288a306ab22e4b63aceeaa81ec50040ca76d3e079f6efa5fc1c2691bf278266d4039ac1cf4fafb6', 4, 1, 'authToken', '[]', 1, '2022-09-23 07:27:39', '2022-09-23 07:27:39', '2023-09-23 12:57:39'),
 ('55cff03e62d0214d6e06b1245cf0d10f4b919e42d540214de8a8fca649f9980501080bcd47881848', 4, 1, 'authToken', '[]', 0, '2022-09-22 04:10:28', '2022-09-22 04:10:28', '2023-09-22 09:40:28'),
 ('623f15399e4be46c5b13fac9d65e75ea9da7fa850166b738fb9af8672cb681ac23b7b110e0152e8b', 4, 1, 'authToken', '[]', 1, '2022-09-21 23:40:52', '2022-09-21 23:40:52', '2023-09-22 05:10:52'),
+('67178fed963d34b42e8a299cc64bfd9d66b8abf6d06f5bc39d09e0e875dbab383f50c70370b7c971', 4, 1, 'authToken', '[]', 1, '2022-09-26 07:37:48', '2022-09-26 07:37:48', '2023-09-26 13:07:48'),
+('6f9bfe6bc6475c180fcd2f92b7f15723cfeb5f2f02857469a4a2c9592c0a4d6093ca981677f5e7f3', 4, 1, 'authToken', '[]', 1, '2022-09-30 08:50:34', '2022-09-30 08:50:34', '2023-09-30 14:20:34'),
 ('75362e491109039d41689eb8ff8c7f024176b7c68894cf616fec7c0d9e2deeb6842c6abfe81b8bb6', 4, 1, 'authToken', '[]', 0, '2022-09-20 23:45:49', '2022-09-20 23:45:49', '2023-09-21 05:15:49'),
+('781fcfa59a388fb52505537c336fd99e09391473af2c3cd40e444c75ac30ebc9bc8f39a00fb1abdf', 4, 1, 'authToken', '[]', 1, '2022-09-27 08:29:40', '2022-09-27 08:29:40', '2023-09-27 13:59:40'),
 ('7bc577dddd68ad1eb5fe53f010b8c1331be5221e54710b339a4187555a60754983da8a7c2975f123', 4, 1, 'authToken', '[]', 0, '2022-09-22 05:06:05', '2022-09-22 05:06:05', '2023-09-22 10:36:05'),
+('7bc645c99195f9b2f03350991620540ed20847b2b68965b0998858827c812ebf012744cbcea79313', 4, 1, 'authToken', '[]', 0, '2022-10-07 07:48:19', '2022-10-07 07:48:19', '2023-10-07 13:18:19'),
+('81e01c00208201c10305b57de3859cba077a37dc63e100c5de8bc759c7067e4b7887cdf38ea9d90a', 4, 1, 'authToken', '[]', 1, '2022-09-23 08:20:27', '2022-09-23 08:20:27', '2023-09-23 13:50:27'),
 ('822165e3f26a07ab33d3c0313e9887818f66948f18bc071d5bbf4ac4b2355150cde650296b1312c9', 4, 1, 'authToken', '[]', 1, '2022-09-21 23:01:36', '2022-09-21 23:01:36', '2023-09-22 04:31:36'),
 ('84dfd4215d32b3040a056647a7b56a7ab8940d7aeb45a8554d6c2fab3eb9bd0a151a791b4364957c', 4, 1, 'authToken', '[]', 0, '2022-09-20 23:42:19', '2022-09-20 23:42:19', '2023-09-21 05:12:19'),
 ('86265085dba86edbe29677ea726274d5cdf4f8f8cf75d04e70b0fce629778af72e31d3f014300205', 4, 1, 'authToken', '[]', 1, '2022-09-21 02:31:08', '2022-09-21 02:31:08', '2023-09-21 08:01:08'),
 ('87457bb76c4a2aef1ecee3a0306b67afdc10ac24ff554ad4c8ecba09de3886ebe59bce3ebb50aa58', 4, 1, 'authToken', '[]', 1, '2022-09-22 03:47:25', '2022-09-22 03:47:25', '2023-09-22 09:17:25'),
 ('890d676c394973610181f6f81eeaec8ce58573fa84941b52a4ec8804665f6a2a34f64a59096ce05e', 4, 1, 'authToken', '[]', 1, '2022-09-20 23:49:31', '2022-09-20 23:49:31', '2023-09-21 05:19:31'),
+('8cfd05aeb7cef09a0e90ac8afec46eeaa2846c9a8eb4f9a57ceead2f1ad030692616342593540d54', 4, 1, 'authToken', '[]', 1, '2022-09-23 03:59:11', '2022-09-23 03:59:11', '2023-09-23 09:29:11'),
+('8da67b10c58c0bcd135e489d68503033d44636bf3bf9d940e3dab602f8894e7348a62c0c28de6e83', 4, 1, 'authToken', '[]', 1, '2022-09-23 00:43:25', '2022-09-23 00:43:25', '2023-09-23 06:13:25'),
+('9007cab7354d1dfc73aff19a5697bb8c1a2aac4da22c13f7a482a08652f27e74e269b6f5d9f33c0a', 4, 1, 'authToken', '[]', 1, '2022-09-23 08:21:18', '2022-09-23 08:21:18', '2023-09-23 13:51:18'),
+('90dbd63617cbacd3f6350d8d39543441bd702a39b1cf808dde0e5ad5d94f28dd9f7f4e2bda739439', 4, 1, 'authToken', '[]', 1, '2022-09-26 07:37:53', '2022-09-26 07:37:53', '2023-09-26 13:07:53'),
+('9100b6de163011192cc8b0db067dee35de4d1d4ba170bba068b8bd3928b7437fe561361c43114457', 4, 1, 'authToken', '[]', 1, '2022-09-26 08:31:40', '2022-09-26 08:31:40', '2023-09-26 14:01:40'),
 ('92fcdbd94c71aefb3f68e7f7c865ea74577258efa76c555f79cd202fff380da3ae6a51a7d5a3d199', 4, 1, 'authToken', '[]', 1, '2022-09-22 00:02:15', '2022-09-22 00:02:15', '2023-09-22 05:32:15'),
+('937fdbe62ee2653295da79429cbe975a4ee2df7f61fb4e92b3a6cca14813fa064aa722f4832e2544', 4, 1, 'authToken', '[]', 1, '2022-09-23 07:48:04', '2022-09-23 07:48:04', '2023-09-23 13:18:04'),
 ('9e9beefb732c2bb72b3865619a7cd18185e36815b39213bd5ede49e0b21b2b89995f43eac9aa95b1', 4, 1, 'authToken', '[]', 1, '2022-09-21 23:38:42', '2022-09-21 23:38:42', '2023-09-22 05:08:42'),
+('9fff0b5f592170e0a0f7e05457d2dab3bdcb96db453a8b5779138ab0643d2976339f7efe4281db4e', 4, 1, 'authToken', '[]', 1, '2022-09-23 07:31:19', '2022-09-23 07:31:19', '2023-09-23 13:01:19'),
 ('a35c630bfdc660ab4ba2ffa6753e1004e68d6c688a5bddefefbbd9ab0670beb48078f3de899c4304', 4, 1, 'authToken', '[]', 1, '2022-09-22 02:34:12', '2022-09-22 02:34:12', '2023-09-22 08:04:12'),
 ('a8e683fed97720f613368b1ea2781e5dbdaeeeabe9bacb9ff3e114fecdd690d97751c5c43cdfedd1', 4, 1, 'authToken', '[]', 0, '2022-09-22 03:29:18', '2022-09-22 03:29:18', '2023-09-22 08:59:18'),
 ('a921114f0e5a1abe9479a4ce519ffee775b6744e237ba2abe0e74c000b3e72597018e0679ab67d29', 4, 1, 'authToken', '[]', 1, '2022-09-21 04:07:30', '2022-09-21 04:07:30', '2023-09-21 09:37:30'),
+('ac1c5e73247ac8baf584ae96d13e34b7c7d83e84cd593ed18c808c066b91eb835a098a01ea279e96', 4, 1, 'authToken', '[]', 1, '2022-09-23 08:23:54', '2022-09-23 08:23:54', '2023-09-23 13:53:54'),
 ('ad08242d718dd578097773a527f52d1483a9f5478a83e84e9e01d8a8059be68b02d8dac99f6de4e8', 4, 1, 'authToken', '[]', 1, '2022-09-21 23:45:35', '2022-09-21 23:45:35', '2023-09-22 05:15:35'),
 ('b065acc803a8f005b80f6365e94facebf0e9e1a0a6caaa6d00938de3e2aa14681d0d96d992c41f06', 4, 1, 'authToken', '[]', 0, '2022-09-20 23:48:17', '2022-09-20 23:48:17', '2023-09-21 05:18:17'),
 ('b0f33ad2948ef5412ee0481c105ee99eae1d474559b5d29b69a4b3974c1469d69c0ae0b0ecd71fb7', 4, 1, 'authToken', '[]', 1, '2022-09-22 01:34:23', '2022-09-22 01:34:23', '2023-09-22 07:04:23'),
 ('ba289a37e17313a2bc9dbe04035f24c1d80731a059ffb61f0e22db742ea17da511b780359fff9698', 4, 1, 'authToken', '[]', 1, '2022-09-22 03:35:31', '2022-09-22 03:35:31', '2023-09-22 09:05:31'),
 ('be4f12ff593b04495c24201ad1578af9d6978f26c1ed1a92ddc58096e173fd5fd4d587fc3df42f6a', 4, 1, 'authToken', '[]', 1, '2022-09-22 01:43:15', '2022-09-22 01:43:15', '2023-09-22 07:13:15'),
+('be6142a90057a80268ff7c3d6fdf5bb0b454176f4d22490ae0bc8b83e87721a79ddd13b49ac270ac', 4, 1, 'authToken', '[]', 1, '2022-09-23 08:23:45', '2022-09-23 08:23:45', '2023-09-23 13:53:45'),
+('bec8908fe2a704eadac9055a521c1eefb8e53e40851e720a725ea26c840a882ffb212cad4a30a259', 4, 1, 'authToken', '[]', 0, '2022-09-26 08:59:09', '2022-09-26 08:59:09', '2023-09-26 14:29:09'),
 ('c3334734eea792fa942475edb1641c7834d9e90e6bf0cea84dd5f0b5287b42a5cf2f415bbb2cdb40', 1, 1, 'authToken', '[]', 0, '2022-09-20 06:30:36', '2022-09-20 06:30:36', '2023-09-20 12:00:36'),
 ('c35477c03e2c344051927d760d4517102d713de2936a4e63f75209a5cd4d4a0f281b34222eda0847', 4, 1, 'authToken', '[]', 0, '2022-09-20 23:42:30', '2022-09-20 23:42:30', '2023-09-21 05:12:30'),
 ('c465dd0c72037009acd1c62c6519c0ddf85d90797ecbae3dbf2b8ef09a611ab31f0e37c0d18de4b5', 4, 1, 'authToken', '[]', 0, '2022-09-21 05:57:05', '2022-09-21 05:57:05', '2023-09-21 11:27:05'),
+('d0c0a58c4c7b3a5b75d031db87879c420dc14f1bf163f27f8861de7360e55f2c97305b36aac0b772', 4, 1, 'authToken', '[]', 1, '2022-09-27 08:29:35', '2022-09-27 08:29:35', '2023-09-27 13:59:35'),
 ('d197193d4ce47f41d408fae99d3a9370c451994155fb3bb6e420fa01c94db9d18122a14bdcd91466', 4, 1, 'authToken', '[]', 0, '2022-09-20 23:43:06', '2022-09-20 23:43:06', '2023-09-21 05:13:06'),
 ('d2a8d32a95fc69faeeb2f543bf555a01440b66c64577156ecbc517f8f3d502d6742cc20f2e18a547', 4, 1, 'authToken', '[]', 1, '2022-09-22 01:45:04', '2022-09-22 01:45:04', '2023-09-22 07:15:04'),
 ('dc5c19ae30f2f9b0d879617a9784aae79eefb293ca8bb89652decf992a6caaa1d498049c7e98e918', 4, 1, 'authToken', '[]', 1, '2022-09-21 04:00:17', '2022-09-21 04:00:17', '2023-09-21 09:30:17'),
 ('e14369ce55e5e10dd1b690df06eb9a04bb7b8b523a12a79915df3ecdf040cad042873ff4f390c503', 4, 1, 'authToken', '[]', 1, '2022-09-20 23:53:11', '2022-09-20 23:53:11', '2023-09-21 05:23:11'),
 ('e179625d0e3644789962ec567d109b9ef5a27b627cfd25ad7f82947524817897328e28aaa39a56aa', 4, 1, 'authToken', '[]', 1, '2022-09-21 23:36:44', '2022-09-21 23:36:44', '2023-09-22 05:06:44'),
+('e23ac79f0d48c4b3695a41c89bf42339404654c5be41d77fcee6413c0880830a34dacc81a87ea29b', 4, 1, 'authToken', '[]', 1, '2022-09-23 07:49:41', '2022-09-23 07:49:41', '2023-09-23 13:19:41'),
+('e29d685983748c2440d16fb90a6b1e92b21ae29bb7162eda4943f681702eccca5fdbbff6b731d94b', 4, 1, 'authToken', '[]', 1, '2022-09-30 03:44:16', '2022-09-30 03:44:16', '2023-09-30 09:14:16'),
 ('e5ff3f3d29bc61ec3653149f986e2df9dd82948b836a0a8e42594b4b0e614991c090d9e57adeb3e3', 4, 1, 'authToken', '[]', 1, '2022-09-22 02:02:09', '2022-09-22 02:02:09', '2023-09-22 07:32:09');
 
 -- --------------------------------------------------------
@@ -299,14 +357,21 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `role_id`, `password`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Super Admin', 'superadmin@gmail.com', NULL, 1, '$2y$10$yLWv8oVf45otE9RIwkiSTei.pLqUWh9gJa8LbKB76eKIqWDUWscfe', NULL, NULL, NULL, NULL),
-(2, 'Admin', 'accountadmin@gmail.com', NULL, 2, '$2y$10$ennX7XGJjWJiDEY6.F0GH.XkBOR1Y3rTFIOdpoKZvxuY3GS2YiMNC', NULL, NULL, NULL, NULL),
-(3, 'Users', 'projectadmin@gmail.com', NULL, 3, '$2y$10$6thRvTA9SpQH25vGRciIcO4OOaYE45Q8MczkokJiLVy/W.gfkuoXO', NULL, NULL, NULL, NULL),
-(4, 'Anees Ahmed', 'admin@example.com', NULL, 1, '$2y$10$yLWv8oVf45otE9RIwkiSTei.pLqUWh9gJa8LbKB76eKIqWDUWscfe', NULL, NULL, NULL, NULL);
+(1, 'Super Admin', 'superadmin@gmail.com', NULL, 2, '$2y$10$yLWv8oVf45otE9RIwkiSTei.pLqUWh9gJa8LbKB76eKIqWDUWscfe', NULL, NULL, '2022-10-05 04:35:12', NULL),
+(3, 'Users 2', 'projectadmin@gmail.com', NULL, 2, '$2y$10$6thRvTA9SpQH25vGRciIcO4OOaYE45Q8MczkokJiLVy/W.gfkuoXO', NULL, NULL, '2022-10-04 22:45:02', NULL),
+(4, 'M Anees Ahmed 2', 'admin@example.com', NULL, 1, '$2y$10$yLWv8oVf45otE9RIwkiSTei.pLqUWh9gJa8LbKB76eKIqWDUWscfe', NULL, NULL, '2022-10-03 23:17:56', NULL);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `employees`
+--
+ALTER TABLE `employees`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `employees_email_unique` (`email`),
+  ADD UNIQUE KEY `employees_phone_unique` (`phone`);
 
 --
 -- Indexes for table `failed_jobs`
@@ -389,6 +454,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `employees`
+--
+ALTER TABLE `employees`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -398,7 +469,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `oauth_clients`
