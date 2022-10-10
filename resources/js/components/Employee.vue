@@ -55,10 +55,11 @@
       bordered
       striped
       hover
+      small
     >
       <template #cell(action)="data">
         <b-button
-          class="rounded-circle p-2"
+          class="rounded-circle p-1"
           @click="get_user_by_id(data.item)"
           v-b-modal.user_edit_modal
           variant="outline-success"
@@ -67,7 +68,7 @@
         </b-button>
 
         <b-button
-          class="rounded-circle p-2"
+          class="rounded-circle p-1"
           @click="delete_user(data.item)"
           variant="outline-danger"
         >

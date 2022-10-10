@@ -70,9 +70,9 @@ public function logout (Request $request){
 public function users(){
 
     $user= User::select('users.*','roles.role_name')->join('roles', 'roles.role_id', '=', 'users.role_id')->orderBy('users.id')->get();
-
+    $roles= Role::select('role_id','role_name')->get();
    
-    return response()->json(['message'=>'User Return Successfully' ,'user' => $user], 200);
+    return response()->json(['message'=>'User Return Successfully' ,'user' => $user,'roles' => $roles], 200);
     }
 
 
@@ -105,4 +105,25 @@ public function get_user($id){
     return response()->json(['message'=>'User Return Successfully' ,'user' => $user ,'roles' => $roles], 200);
     } 
         
+public function addUser(Request $request){
+    $requestData = $request->all();
+    $validator = Validator::make($requestData,[
+    'name' => 'required|max:55',
+    'email' => 'email|required|unique:users',
+    'role_id' => 'required',
+    'password' => 'required|confirmed'
+    ]);
+
+    if ($validator->fails()) {
+    return response()->json([
+    'errors' => $validator->errors()
+    ], 422);
+    }
+
+    $requestData['password'] = Hash::make($requestData['password']);
+
+    $user = User::create($requestData);
+
+    return response([ 'status' => true, 'message' => 'User successfully register.' ], 200);
+    }
 }

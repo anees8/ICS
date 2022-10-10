@@ -51,7 +51,7 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Fana sans", sans-serif, "Times New Roman", Times, serif;
+  font-family: sans-serif, "Times New Roman", Times, serif, "Fana sans";
 }
 a,
 a:hover {
