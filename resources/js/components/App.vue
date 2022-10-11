@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import Auth from "../Auth.js";
 import Sidebar from "./common/sidebar.vue";
 import Header from "./common/header.vue";
 import Footer from "./common/footer.vue";
@@ -24,9 +25,9 @@ export default {
   data() {
     return {
       users: {
-        profile: "",
-        name: "",
-        user_role: "",
+        profile: Auth.user.profile ? Auth.user.profile : "",
+        name: Auth.user.name ? Auth.user.name : "",
+        user_role: Auth.user.role_name ? Auth.user.role_name : "",
       },
     };
   },

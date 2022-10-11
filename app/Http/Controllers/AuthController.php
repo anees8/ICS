@@ -51,8 +51,8 @@ public function login(Request $request){
         }
 
         $accessToken = auth()->user()->createToken('authToken')->accessToken;
-
-        return response(['user' => auth()->user(), 'access_token' => $accessToken], 200);
+        $user= User::select('users.*','roles.role_name')->join('roles', 'roles.role_id', '=', 'users.role_id')->find(auth()->user()->id);
+        return response(['user' =>$user , 'access_token' => $accessToken], 200);
         }
 
 public function me(Request $request){

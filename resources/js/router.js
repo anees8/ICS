@@ -34,6 +34,8 @@ const router = new VueRouter({
   routes: routes
 });
 
+
+
 router.beforeEach((to, from, next) => {
  if (to.matched.some(record => record.meta.requiresAuth) ) {
      if (Auth.check()) {
@@ -46,5 +48,7 @@ router.beforeEach((to, from, next) => {
      next();
  }
 });
+
+
 
 export default router;
