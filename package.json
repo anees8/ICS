@@ -25,6 +25,7 @@
     "dependencies": {
         "bootstrap": "^4.6.1",
         "bootstrap-vue": "^2.22.0",
+        "material-icons": "^1.12.0",
         "sweetalert2": "^11.4.24",
         "vue-axios": "^3.4.1",
         "vue-router": "^3.5.4"

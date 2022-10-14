@@ -41,6 +41,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import "material-icons/iconfont/material-icons.css";
 :root {
   --dark: #293462;
   --light: rgba(41, 52, 98, 0.2);
