@@ -25,11 +25,28 @@ export default {
   data() {
     return {
       users: {
-        profile: Auth.user.profile ? Auth.user.profile : "",
-        name: Auth.user.name ? Auth.user.name : "",
-        user_role: Auth.user.role_name ? Auth.user.role_name : "",
+        profile: "",
+        name: "",
+        user_role: "",
       },
     };
+  },
+  created() {
+    if (Auth.user) {
+      this.loadlist();
+    }
+    this.timer = setInterval(() => {
+      if (Auth.user) {
+        this.loadlist();
+      }
+    }, 3000);
+  },
+  methods: {
+    loadlist() {
+      axios.get("me").then((resp) => {
+        this.users = resp.data.user;
+      });
+    },
   },
 
   components: {
