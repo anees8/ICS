@@ -17,6 +17,7 @@
       :icon="item.icon"
       :url="item.url"
       :depth="0"
+      :Permissions="item.Permissions"
       :data="item.children"
       :smallMenu="smallMenu"
     />
@@ -34,26 +35,30 @@ export default {
         label: "Home",
         icon: "home",
         url: "/dashboard",
+        Permissions: 1,
       },
       {
         label: "About",
 
         icon: "visibility",
         url: "/about",
+        Permissions: 1,
       },
       {
         label: "Users",
         icon: "people",
+        Permissions: 1,
         children: [
-          { label: "Users List", icon: "person", url: "/list_users" },
-          { label: "Employee", icon: "badge", url: "/list_employee" },
+          { label: "Users List", icon: "person", url: "/list_users", Permissions: 1 },
+          { label: "Employee", icon: "badge", url: "/list_employee", Permissions: 1 },
           {
             label: "Outsource Employee",
             icon: "person",
             url: "/list_outsource_employee",
+            Permissions: 1,
           },
-          { label: "Customer", icon: "person", url: "/list_customer" },
-          { label: "Supplier", icon: "person", url: "/list_suplier" },
+          { label: "Customer", icon: "person", url: "/list_customer", Permissions: 1 },
+          { label: "Supplier", icon: "person", url: "/list_suplier", Permissions: 1 },
         ],
       },
     ],
@@ -61,6 +66,18 @@ export default {
 
   components: {
     MenuItem,
+  },
+
+  created() {
+    this.loadmenu();
+  },
+  methods: {
+    loadmenu() {
+      axios.get("get_router").then((resp) => {
+        // console.log(resp.data.permission);
+        this.menuTree = resp.data.permission;
+      });
+    },
   },
 };
 </script>

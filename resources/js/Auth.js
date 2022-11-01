@@ -27,5 +27,7 @@ class Auth {
         window.localStorage.removeItem('user');
         this.user = null;
     }
+
+   
 }
 export default new Auth();

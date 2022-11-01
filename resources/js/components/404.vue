@@ -10,8 +10,8 @@
           The page you are looking for might have been removed had its name changed or is
           temporarily unavailable.
         </p>
-
-        <b-link @click="goBack">Back</b-link>
+        <b-link class="btn" variant="outline-primary" @click="gohome">Home</b-link>
+        <b-link class="btn" variant="outline-primary" @click="goBack">Back</b-link>
       </div>
     </div>
   </div>
@@ -21,6 +21,9 @@ export default {
   methods: {
     goBack() {
       this.$router.go(-1);
+    },
+    gohome() {
+      this.$router.push("/");
     },
   },
 };

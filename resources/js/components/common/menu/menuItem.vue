@@ -1,6 +1,10 @@
 <template>
   <div class="menu-item" :class="{ expanded: expanded }">
-    <b-link class="text-decoration-none" v-bind:to="url">
+    <b-link
+      v-show="Permissions"
+      class="text-decoration-none"
+      v-bind:to="url ? url : null"
+    >
       <div
         class="label d-flex justify-content-between align-items-center"
         v-on:click="togggleMenu()"
@@ -16,7 +20,7 @@
           <span v-if="showLabel">{{ label }} </span>
         </div>
 
-        <div v-if="data" class="right">
+        <div v-if="data ? data.length > 0 : false" class="right">
           <i class="material-icons expand" :class="{ expanded: expanded }">expand_more</i>
         </div>
       </div>
@@ -36,6 +40,7 @@
         :icon="item.icon"
         :url="item.url"
         :depth="depth + 0"
+        :Permissions="item.Permissions"
         :data="item.children"
         :smallMenu="smallMenu"
       ></menu-item>
@@ -49,6 +54,7 @@ export default {
 
   props: {
     label: { type: String, required: true },
+    Permissions: { type: Number, required: true },
     icon: { type: String },
     depth: { type: Number, required: true },
     url: { type: String },

@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Permission;
+
+
 
 class AuthController extends Controller
 {
@@ -126,4 +129,28 @@ public function addUser(Request $request){
 
     return response([ 'status' => true, 'message' => 'User successfully register.' ], 200);
     }
+public function hasPermissionsNeeded(Request $request){
+        $permission=Permission::where('route',$request->router)->where('status',1)->get();
+        
+
+        if(count($permission)>0){
+        $access=true;
+        }else{
+        $access=false;
+        }
+ return response()->json(['message'=>'User Return Successfully' ,'permission' => $access,'count'=>count($permission) ], 200);        
+ }
+ 
+public function get_router(Request $request){
+
+    $menu = new \App\Models\Permission;
+    
+    $menuList = $menu->tree();
+
+    
+
+  
+ return response()->json(['message'=>'User Return Successfully' ,'permission'=>($menuList) ], 200);        
+}
+ 
 }

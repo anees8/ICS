@@ -43,9 +43,16 @@ export default {
   },
   methods: {
     loadlist() {
-      axios.get("me").then((resp) => {
-        this.users = resp.data.user;
-      });
+      axios
+        .get("me")
+        .then((resp) => {
+          this.users = resp.data.user;
+        })
+        .catch((error) => {
+          window.localStorage.removeItem("token");
+          window.localStorage.removeItem("user");
+          router.push("/login");
+        });
     },
   },
 
