@@ -40,13 +40,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
  if (to.matched.some(record => record.meta.requiresAuth) ) {
      if (Auth.check()) {
-        // console.log(hasPermissionsNeeded(to.path));
-        // // if(Auth.hasPermissionsNeeded(to.path)==true || to.path==="/dashboard"){
-        // //  next();
-        // //  return;
-        // // }else{
-        // //     router.push('/login');
-        // // }
+    
             next();
          return;
      } else {
@@ -57,34 +51,8 @@ router.beforeEach((to, from, next) => {
  }
 });
 
-// hasPermissionsNeeded(to){
-       
-//     this.trouter={
-//         'router':to,
-    
-//           };
-
-//         axios.post("hasPermissionsNeeded/", this.trouter).then((resp) => {
-
-//          if( resp.data.permission===true){
-
-//             return true;
-//          }else{
-//             return true;
-//          }
-     
-    
-         
-     
-        
-//           });    
-   
-
-          
-   
 
 
-// }
 
 
 

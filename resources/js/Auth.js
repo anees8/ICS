@@ -28,6 +28,8 @@ class Auth {
         this.user = null;
     }
 
+
+
    
 }
 export default new Auth();
